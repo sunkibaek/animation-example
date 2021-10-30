@@ -4,6 +4,7 @@ import Animated, {
   withSpring,
   useAnimatedStyle,
   useSharedValue,
+  withRepeat,
 } from "react-native-reanimated";
 
 const styles = StyleSheet.create({
@@ -22,11 +23,7 @@ const Flashing = () => {
   const opacity = useSharedValue(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      opacity.value = opacity.value === 0 ? withSpring(1) : withSpring(0);
-    }, 1000);
-
-    return () => clearInterval(interval);
+    opacity.value = opacity.value = withRepeat(withSpring(1), -1, true);
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => {
