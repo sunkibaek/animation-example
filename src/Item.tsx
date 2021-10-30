@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import Flashing from "./Flashing";
+
 interface IProps {
   dimension: number;
   content: string;
@@ -18,6 +20,7 @@ const styles = StyleSheet.create({
 const Item = ({ dimension, content }: IProps) => {
   return (
     <View style={[{ width: dimension, height: dimension }, styles.container]}>
+      <Flashing />
       <Text>{content}</Text>
     </View>
   );
