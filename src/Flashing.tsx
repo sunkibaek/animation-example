@@ -1,5 +1,9 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+} from "react-native-reanimated";
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +17,23 @@ const styles = StyleSheet.create({
 });
 
 const Flashing = () => {
-  return <View style={styles.container} />;
+  const opacity = useSharedValue(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      opacity.value = opacity.value === 0 ? 1 : 0;
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      opacity: opacity.value,
+    };
+  });
+
+  return <Animated.View style={[styles.container, animatedStyle]} />;
 };
 
 export default Flashing;
