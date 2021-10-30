@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import Flashing from "./Flashing";
+import FlashingWithAnimatable from "./FlashingWithAnimatable";
 
 interface IProps {
   dimension: number;
@@ -20,7 +20,8 @@ const styles = StyleSheet.create({
 const Item = ({ dimension, content }: IProps) => {
   return (
     <View style={[{ width: dimension, height: dimension }, styles.container]}>
-      <Flashing />
+      <FlashingWithAnimatable />
+
       <Text>{content}</Text>
     </View>
   );
